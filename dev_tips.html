@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="css/common.css" type="text/css" />
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/common.js"></script>
+  <title>Eigen C++ではじめる機械学習</title>
+  <!-- google analityics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35918686-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+ <div id="header">
+    <div id="navi">
+       <ul>
+       <li class="contact"><a href="mailto:suzumura.mllab.nit@gmail.com"><font color="#FFFFFF">CONTACT</font></a></li>
+       </ul>
+    </div><!-- /#navi-->
+ </div><!-- /#header-->
+ <div id="menu">
+    <ul>
+    <li><a href="profile.html">About Me</a></li>
+    <li><a href="index.html">Publications</a></li>
+    <li><a href="software.html">Software</a></li>
+    <li><a href="dev_tips.html" class="on">C++ ML</a></li>
+    </ul>
+ </div><!-- /#menu-->
+ <div id="contents">
+ <h2>Eigen C++ではじめる機械学習</h2>
+ここでは、Eigenと呼ばれるC++用の数値計算ライブラリを用いていくつかの機械学習アルゴリズムを実装します．
+簡単に実装ができて、かつ応用が効くものをピックアップしていきます．
+大枠の説明を心がけています．興味が湧けば参考文献などもご覧ください．
+<ul>
+  <li>導入
+  <ul>
+  <li><a href="dev_tips/part1_gcc.html">C++11のコンパイル環境構築</a></li>
+  <li><a href="dev_tips/part1_cmake.html">CMakeのインストールと使い方</li>
+  <li><a href="dev_tips/part1_eigen.html">Eigenの導入と使用方法</a></li>
+  <li><a href="dev_tips/part1_gnuplot.html">Gnuplot interface を用いたデータの可視化</a></li>
+  <li><a href="dev_tips/part1_rlang.html">R言語の行列をEigenで操作する(Rcppの紹介)</a></li>
+  </ul>
+  </li>
+
+  <li>最小二乗誤差最小化学習（<font color="red">若干更新が遅れます</font>）
+  <ul>
+  <li>最小二乗法による線形回帰</li>
+  <li>リッジ回帰</li>
+  <li>LASSO回帰（Shootingアルゴリズムによる解法）</li>
+  </ul>
+  </li>
+
+  <li>ロジステック回帰の実装
+  <ul>
+  <li>最急降下法</li>
+  <li>確率的勾配法</li>
+  <li>直線探索</li>
+  <li>準ニュートン法(BFGS法, L-BFGS法)</li>
+  <li>共役勾配法, Newton-CG法</li>
+  </ul>
+  </li>
+
+  <li>サポートベクターマシンン
+  <ul>
+  <li>劣勾配法</li>
+  <li>Dual Coordinate Descent/Ascent Method</li>
+  <li>LIBLINEARをEigenで高速化する</li>
+  </ul>
+  </li>
+
+  <li>決定木学習
+  <ul>
+  <li>CART</li>
+  <li>Eigen C++なら20行で書けるBoostingアルゴリズム</li>
+  <li>Gradient Boosting</li>
+  </ul>
+  </li>
+
+  <li>ニューラルネットワークの実装
+  <ul>
+  <li>3層ニューラルネットを10分でつくる</li>
+  <li>並列計算してみる</li>
+  <li>Greedy Layer-wise 学習の実装</li>
+  </ul>
+  </li>
+
+  <li><a href="dev_tips/tune_atlas.html">その他　BLAS,LAPACKのチューニング</a></li>
+</ul>
+ </div><!-- /#contents-->
+ <div id="footer">
+　　<div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
+ </div><!-- /#footer-->
+</div><!-- /#top-->
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
+  <link type="text/css" rel="stylesheet" href="../css/styles/shCoreDefault.css"/>
+  <script type="text/javascript" src="../css/scripts/shCore.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushBash.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushCpp.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushPlain.js"></script>
+  <script type="text/javascript">SyntaxHighlighter.all();</script>
+  <title>R言語の行列をEigenで操作する(Rcppの紹介)</title>
+  <!-- google analityics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35918686-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+
+<div id="contents">
+ <h2>R言語の行列をEigenで操作する(Rcppの紹介) (<a href="../dev_tips.html">全体の目次に戻る</a>)</h2>
+ ※以下の内容は必読ではありません．<br/>
+ここでは、Rcppと呼ばれるツールを用いて「C/C++で書かれたコードをR言語のライブラリーとして使用する」方法を紹介します．
+</br>
+Windowsで作業する場合は、
+<a href="https://cran.r-project.org/bin/windows/Rtools/">Rtools</a>をインストールしてください．
+また、Rがインストールされている「bin」フォルダとRtoolsがインストールされている「bin」フォルダのパスをそれぞれ通してください
+（コマンドプロンプト上で「R CMD」という命令が使用できるようになります）．
+</br></br>
+
+<h3>とりあえずRcppを使用してみる</h3>
+以下、[R端末]はR端末上でコマンドをタイプすることを示し、何も書かなければ通常の端末あるいはコマンドプロンプト上での作業を示します．
+詳細はさておき、とりあえず作業ステップをまとめます．
+<ul>
+  <li>(1) [R端末] Rcppをインストールします：
+  <pre class="brush: bash;">install.packages("Rcpp", repos="http://cran.us.r-project.org")</pre>
+  </li>
+  <li>(2) [R端末] 新しいパッケージの雛形を作成します（test という名前で保存）:
+  <pre class="brush: bash;">library(Rcpp) # Rcppのロード
+Rcpp.package.skeleton("test")</pre></li>
+  </li>
+  <li>(3) ステップ(2)により「<font color="red">test/src</font>」というフォルダができるので、その中に以下の「test.cc」を作成する:
+  <pre class="brush: cpp;">#include &lt;Rcpp.h&gt;
+#include &lt;string&gt;
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+void foo(SEXP arg) {
+  std::string s = Rcpp::as&lt;std::string&gt;(arg);
+  std::cout &lt;&lt; s &lt;&lt; std::endl;
+}</pre>[[Rcpp::export]] というコメントを関数の前に定義しておくことで、自動的にRとC/C++をリンクできます．</li>
+  <li>(4) [R端末] <font color="red">test/</font> フォルダ直下 (test/src直下でははいので注意) で以下をタイプします：
+  <pre class="brush: bash;">library(Rcpp) # Rcppのロード
+compileAttributes()</pre>
+  アドバイス：</br>
+  　R端末上で現在のディレクトリを確認：getwd()</br>
+  　R端末上で現在のディレクトリを変更：setwd(移動先のパス)</br>
+  　compileAttributes()は [[Rcpp::export]] というコメントが付けられた関数を自動的に解析します．</li>
+  <li>(5) <font color="red">test/</font> フォルダ直下にて以下をタイプして、作成したパッケージをインストールします：</li>
+    <pre class="brush: bash;">R CMD INSTALL ../test # ソースから install
+R CMD build ../test # gz 圧縮ファイルの作成
+R CMD INSTALL 圧縮ファイル名 # gz から install</pre>
+（一行目だけを使用しておけばOKです．パッケージを配布したい場合は二行目を使用しますが、配布先でもRcppのインストールが必要です）
+  <li>[R端末] 以下のサンプルを実行して、"test Rcpp" と表示されるか確認
+  <pre class="brush: bash;">library(test)
+foo("test Rcpp")</pre></li>
+</ul>
+うまく行かない時のエラーチェックリスト:
+<ul>
+  <li>Rで実行したいC/C++の関数の名前や引数を変更したときは、必ず compileAttributes() を再実行する (関数の中身だけの変更ならば実行不必要)</li>
+  <li>一度 R端末を落としてからライブラリを再度ロードする</li>
+  <li>コンパイルできないときは、コンパイル時に作成されたオブジェクトを消してみる</li>
+</ul>
+参考文献：
+<ul>
+  <li>J.J. Allaire, Dirk Eddelbuettel and Romain Francois, "Rcpp Attributes", Rcpp ver. 0.10.6, Oct. 28, 2013.</br></li>
+  <li>Dirk Eddelbuettel and Romain Francois, "Writing a package that uses Rcpp", Rcpp ver. 0.10.6, Oct. 28, 2013.</li>
+</ul>
+
+<h3>EigenからRの行列を操作する</h3>
+EigenからRの行列にアクセスしたいときがあります．
+以下では、Eigen の Map 関数を用いてそれを実行します．
+このC++コードをコンパイルして、R言語上でfoo(A, x)と実行すると、行列Aとベクトルxの要素が二乗されたものに置き換わっています．
+<pre class="brush: cpp;">#include &lt;Eigen/Core&gt;
+#include &lt;Rcpp.h&gt;
+using namespace Rcpp;
+
+// [[Rcpp::export]]
+void foo(NumericMatrix A, NumericVector x)
+{
+  Eigen::Map&lt;Eigen::VectorXd&gt; v(x.begin(), x.length());
+  Eigen::Map&lt;Eigen::MatrixXd&gt; M(A.begin(), A.rows(), A.cols());
+
+  v = v.array() * v.array();
+  M = M.array() * M.array();
+}
+/*
+ Rの行列の内容を書き換えたくない場合：
+(1) xの実態をyにDeepコピーする場合(遅い)
+ NumericVector y = clone(x);
+(2) vを書き込み不可にする(constをつける)
+ const Eigen::Map&lt;Eigen::VectorXd&gt; v(x.begin(), x.length());
+ Rcpp の begin() に関してはここを参照 http://statr.me/rcpp-note/api/Vector_funs.html
+*/ </pre>
+<h2>コンパイルオプションの設定</h2>
+Eigenを使用するには、コンパイラにEigenのインクルードパスを設定する必要があります．
+コンパイルオプションは、「Makevars」というファイルに追加します．C/C++のソースと同じ場所に以下のMakevarsファイルを作成して下さい．
+ <pre class="brush: bash;">PKG_CXXFLAGS= -std=c++11 -I"Eigenのパス" -O2 -march=native $(shell Rscript -e "Rcpp:::CxxFlags()")
+PKG_LIBS=$(shell Rscript -e "Rcpp:::LdFlags()")</pre>
+
+ </div><!-- /#contents-->
+
+ <div id="pageTop">
+   <a href="#top">このページのトップへ戻る</a>
+ </div><!-- /#pageTop-->
+ <div id="footer">
+   <div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
+ </div><!-- /#footer-->
+</div><!-- /#top-->
+</body>
+</html>

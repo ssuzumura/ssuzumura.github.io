@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="../css/common.css" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="../css/styles/shCoreDefault.css"/>
+	<script type="text/javascript" src="../css/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../css/scripts/shBrushBash.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushCpp.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushPlain.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	<title>CMakeのインストールと使い方</title>
+	<!-- google analityics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-35918686-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+<div id="contents">
+ <h2>CMakeのインストールと使い方 (<a href="../dev_tips.html">全体の目次に戻る</a>)</h2>
+ 一般的にC/C++のプログラムを書く際は、複数のソースコードを分割して作成しておきます．
+ このとき、分割されたソースコードを人間が一つ一つ指定してコンパイルするのは骨が折れますね．
+ CMakeの優れる点は、簡単な設定を行うだけで、それらを自動的に行う点です．
+ また、更新があったソースコードのみをコンパイルするため、コンパイル時間が大幅に短縮します．
+ </br></br>
+
+<h3 id="Linux">Linux or Mac における作業</h3>
+LinuxとMacの場合は環境構築が非常に簡単です．
+例えば、Ubuntu OS でしたら以下を実行すれば環境構築は完了です．
+OSXの場合もCMakeのインストーラを実行するだけです．
+<pre class="brush: bash;">
+sudo apt-get install cmake
+</pre>
+次にCMakeの使用方法を説明します．
+下記の二つのファイルを同じディレクトリ上に保存してください．</br>
+<b>CMakeLists.txt</b>:
+<pre class="brush: bash;">
+cmake_minimum_required(VERSION 2.8)
+add_definitions("-std=c++11 -Wall -O2 -march=native")
+add_executable(main test.cc)
+</pre>
+<b>test.cc</b>:
+<pre class="brush: cpp;">
+#include &lt;iostream&gt;
+int main(void) {
+  std::cout &lt;&lt; "test" &lt;&lt; std::endl;
+  return 0;
+}
+</pre>
+
+これらのファイルと同じディレクトリ上で以下が実行できれば作業終了です．
+<pre class="brush: bash;">
+cmake . # build環境構築
+make    # build
+./main  # 実行
+</pre>
+なお、cmakeの挙動がおかしい場合は「<font color="red">CMakeCache.txt</font>」というファイルを一度削除してから、もう一度 cmake を実行して下さい．
+プログラムの実行結果がおかしい場合は「make clean」も実行してみてください．
+</br></br>
+
+<h3 id="Windows">Windowsにおける作業</h3>
+<ul>
+ <li>はじめに公式サイトの<a href="https://cmake.org/download">リンク</a>からインストーラーをダウンロードします.
+ 今回は「cmake-3.4.0-rc1-win32-x86.exe」をダウンロードしましたが、最新のexeファイルで結構です．</li>
+ <li>インストール設定は基本的にはデフォルトのままで構いませんが、環境パスを設定する項目だけ以下のように変更してください．<img src="inst_cmake.png"></img></li>
+ <li>次に、このページの上段に記載されている「CMakeLists.txt」と「test.cc」を同じフォルダ上に作成してください．</li>
+ <li>二つのファイルと同じディレクトリ上で以下が実行できれば作業完了です.</li>
+ <pre class="brush: bash;">
+ cmake -G "MinGW Makefiles". # build環境構築
+ mingw32-make  # build
+ main.exe  # 実行
+ </pre>
+ なお、cmakeの挙動がおかしい場合は「<font color="red">CMakeCache.txt</font>」というファイルを一度削除してから、もう一度 cmake を実行して下さい．
+ プログラムの実行結果がおかしい場合は「mingw32-make clean」も実行してみてください．
+
+ <h4>Windowsワンポイントアドバイス</h4>
+ <ul>
+  <li>「Shiftキー」を押しながら「右クリック」することで「コマンドウィンドウをここで開く」機能が使用できます．</li>
+  <li>「Windowsキー」を押しながら「Rキー」を押すことでコマンドの実行ウィンドウが立ち上がります．
+		そこに「cmd」と打ち込めばコマンドプロンプトが立ち上がります．</li>
+	<li>コマンドプロンプト上で「doskey make=mingw32-make」と打ち込めば、mingw32-make を make というコマンドで実行できます(aliasできます)．</li>
+ </ul>
+
+ </div><!-- /#contents-->
+
+ <div id="pageTop">
+   <a href="#top">このページのトップへ戻る</a>
+ </div><!-- /#pageTop-->
+ <div id="footer">
+   <div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
+ </div><!-- /#footer-->
+</div><!-- /#top-->
+</body>
+</html>

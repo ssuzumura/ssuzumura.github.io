@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="../css/common.css" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="../css/styles/shCoreDefault.css"/>
+	<script type="text/javascript" src="../css/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../css/scripts/shBrushBash.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushCpp.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushPlain.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	<title>Eigenの導入と使用方法</title>
+	<!-- google analityics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-35918686-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+
+<div id="contents">
+ <h2>Eigenの導入と使用方法 (<a href="../dev_tips.html">全体の目次に戻る</a>)</h2>
+<ul>
+ <li> <a href="#explain_text">テキストによる説明</a> </li>
+  <li> <a href="#explain_movie">動画による説明</a> </li>
+</ul>
+
+<h3 id="explain_text">テキストによる説明</h3>
+Eigenはヘッダーファイルとして配布されており，それらをインクルードするだけで使用することができます．
+以下の手順に従い，サンプルコードが実行できることを確認して下さい．</br></br>
+<ul>
+ <li><a href="http://eigen.tuxfamily.org/">こちら</a>の公式サイトから最新版をダウンロードして解凍します (画面右端のGet Itからダウンロード)</li>
+ <li>解凍後，フォルダ名をeigen33とします(33はバージョンを表す).</li>
+ <li>eigen33フォルダを下記のディレクトリ直下に移動させます.
+  <ul>
+   <li> Windowsの場合 C:/</li>
+   <li> Mac/Linuxの場合 /usr/local/include/</li>
+  </ul>
+ </li>
+ <li>以下のCMakeLists.txtファイルを作成してください.
+<pre class="brush: bash;">
+cmake_minimum_required(VERSION 2.8)
+add_definitions("-std=c++11 -Wall -O2 -march=native")
+include_directories(”C:/eigen33”) # eigen33のパスを指定
+add_executable(main test.cc)
+ </li>
+ <li>以下のtest.ccファイルを作成してください.
+<pre class="brush: cpp;">
+#include &lt;iostream&gt;
+#include &lt;Eigen/Core&gt;
+
+int main(void)
+{
+  Eigen::MatrixXd A(3,3);
+  A << 1,2,3,
+       4,5,6,
+       7,8,9;
+
+  std::cout << A << std::endl;
+  return 0;
+}
+ </pre></li>
+ <li>test.ccをコンパイルして実行すると</br>
+　1 2 3</br>
+　4 5 6</br>
+　7 8 9</br>
+が表示されます．コンパイル方法についてはCMakeに関する<a href="./part1_cmake.html">記事</a>をご確認ください．
+</li>
+</ul></br></br>
+
+<h3 id="explain_movie">動画による説明</h3>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/rQCuATKcsv4" frameborder="0" allowfullscreen></iframe>
+
+ </div><!-- /#contents-->
+
+ <div id="pageTop">
+   <a href="#top">このページのトップへ戻る</a>
+ </div><!-- /#pageTop-->
+ <div id="footer">
+   <div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
+ </div><!-- /#footer-->
+</div><!-- /#top-->
+</body>
+</html>

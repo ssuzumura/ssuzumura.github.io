@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<meta http-equiv="Content-Script-Type" content="text/javascript" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" href="../css/common.css" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="../css/styles/shCoreDefault.css"/>
+	<script type="text/javascript" src="../css/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../css/scripts/shBrushBash.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushCpp.js"></script>
+  <script type="text/javascript" src="../css/scripts/shBrushPlain.js"></script>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	<title>C++11のコンパイル環境構築</title>
+	<!-- google analityics -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-35918686-1']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+<div id="contents">
+ <h2>C++11のコンパイル環境構築 (<a href="../dev_tips.html">全体の目次に戻る</a>)</h2>
+<ul>
+ <li><a href="#Linux">Linux/Macにおける作業</a></li>
+ <li><a href="#Windows">Windowsにおける作業</a>
+  <ul>
+	<li><a href="#ShowExt">ファイル拡張子の表示</a></li>
+	<li><a href="#InstMinGW">MinGWのインストール</a></li>
+	<li><a href="#SysVar">環境変数の設定</a></li>
+  </ul>
+ </li>
+</ul>
+
+<h3 id="Linux">Linux or Mac における作業</h3>
+LinuxとMacの場合は環境構築が非常に簡単です．
+例えば、Ubuntu OS でしたら以下を実行すれば環境構築は完了です．
+<pre class="brush: bash;">
+sudo apt-get install gcc
+</pre>
+ただし、バージョン 4.7 以降の GCC をインストールして下さい(g++ -v でバージョン確認)．
+GCC をソースからコンパイルする場合は例えば<a href="http://www.mk-mode.com/octopress/2014/09/30/installation-newest-gcc-by-src-on-linux-mint/">こちら</a>を参考にして下さい．
+</br></br>
+
+<h3 id="Windows">Windowsにおける作業</h3>
+<h4 id="ShowExt">ファイル拡張子の表示</h4>
+Windowsでプログラミングを始める際は必ずファイルの拡張子を表示するように設定してください．
+表示方法は、例えば
+<a href="http://www.microsoft.com/ja-jp/atlife/tips/archive/windows/tips/252.aspx">こちら</a>をご覧ください．
+</br></br>
+
+<h4 id="InstMinGW">MinGWのインストール</h4>
+開発環境の一つであるMinGW-W64をインストールします．
+<ul>
+ <li><a href="http://MinGW-W64.org/doku.php/download/mingw-builds">公式サイト</a>からインストーラーをダウンロードして実行してください．</li>
+ <li>設定画面ではArchitectureを「x86_64」に設定します．<img src="inst_mingw.png"></img></li>
+ <li>MinGW-W64のインストール先は任意で構いません．</li>
+</ul>
+以下、MinGW-W64の「bin」フォルダをWindowsに登録する作業について説明します．
+</br></br>
+
+<h4 id="SysVar">環境変数の設定</h4>
+「コントロールパネル」→「システムとセキュリティ」→「システム」
+から環境変数を設定します．</br>
+<iframe width="420" height="315" src="https://www.youtube.com/embed/KnEPp0MpT0w" frameborder="0" allowfullscreen></iframe>
+
+ </div><!-- /#contents-->
+
+ <div id="pageTop">
+   <a href="#top">このページのトップへ戻る</a>
+ </div><!-- /#pageTop-->
+ <div id="footer">
+   <div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
+ </div><!-- /#footer-->
+</div><!-- /#top-->
+</body>
+</html>
