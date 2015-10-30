@@ -29,16 +29,15 @@ http://www.google.co.jp/
 </head>
 <body>
 <div id="top">
-   <div id="menu">
-      <ul>
-      <li><a href="../index_jp.html#JP" class="on">別の研究内容を見る</a></li>
-      </ul>
-   </div><!-- /#menu-->
-   <div id="contents">
-      <div id="main">
-         <h2>Lシステムの文法発見と誤り訂正</h2>
-         <h3>Lシステムとは</h3>
-         　Lシステムとは再帰構造を有する文法規則であり、生物の形状を描画するためにしばしば用いられます。
+<div id="menu">
+  <ul>
+  <li><a href="../index.html" class="on">別の研究内容を見る</a></li>
+  </ul>
+</div><!-- /#menu-->
+
+<div id="contents">
+<h3>Lシステムとは</h3>
+Lシステムとは再帰構造を有する文法規則であり、生物の形状を描画するためにしばしば用いられます。
 その文法規則は基本的には以下のような記述によって定義されます。
 <div align="center">
 -----------------------</br>
@@ -69,21 +68,21 @@ F &rarr; FF　　　　　</br>
 このように趣のある草木が生成されます。
 なお、図1の元となるLシステムはLシステムの提唱者Lindenmayer氏らによる文献(<a href="http://algorithmicbotany.org/papers/#abop">The algorithmic beauty of plants</a>)で紹介されます。
 
-      <h3>ノイズの誤り訂正と文法発見</h3>
+<h3>ノイズの誤り訂正と文法発見</h3>
 Lシステムにより生物を描画させる研究も面白いものですが、我々は、Lシステムによって生成された文字列から、逆に元の文法規則(種)を発見する研究を行っています。
 以下は、文法発見のデモンストレーション用JAVAアプレットです。
 （<font color=#F01111>アプレットが表示されない場合は、最新のJAVAをインストールした後、JAVAのアドオンを有効にしてください。</font>）
-      <h3>デモの内容</h3>
-このデモでは、「Lシステムとは」で説明した図１のLシステムによって生成された文字列から、逆に元の文法規則を発見します。
-      <h3>操作説明</h3>
+
+<h3>デモの内容</h3>
+このデモでは、図１のLシステムによって生成された文字列から、逆に元の文法規則を発見します。
+
+<h3>操作説明</h3>
 デモの画面右下の「解析開始」というボタンを押すと文法発見を実行します。
 「解析対象の文字列」という項目に、ある程度までのノイズ（文字列）を混ぜたとしても、元の文法や類似の文法を発見できます。</br>
 <div align="center"><applet height=600 width=480 codebase="Lsys_demo" code="demo.class"></applet></div>
 </br>
-   </div><!-- /#contents-->
-   <div id="footer">
-            <div class="copyright">Copyright &copy; November 2012 S.Suzumura Rights Reserved.</div>
-   </div><!-- /#footer-->
+
+</div><!-- /#contents-->
 </div><!-- /#top-->
 </body>
 </html>
