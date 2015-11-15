@@ -53,7 +53,7 @@ Eigenはヘッダーファイルとして配布されており，それらをイ
  <li>以下のCMakeLists.txtファイルを作成してください.
 <pre class="brush: bash;">
 cmake_minimum_required(VERSION 2.8)
-add_definitions("-std=c++11 -Wall -O2 -march=native")
+add_definitions("-std=c++11 -Wall -O3 -march=native")
 include_directories(”C:/eigen33”) # eigen33のパスを指定
 add_executable(main test.cc)
  </li>

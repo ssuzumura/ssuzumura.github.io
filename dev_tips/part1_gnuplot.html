@@ -48,10 +48,19 @@ gnuplot-cppを利用するには、描画ツールの一つである
 
 <h3>サンプルの実行</h3>
 <a href="gnuplot_test.zip">ここに</a>サンプルファイルを置きましたので、今までと同様の方法でコンパイルしてください．
-コンパイルが終わったら main または main.exe を実行すると以下のグラフを描画できます．
+</br><b>コンパイル時の注意点：EigenのインストールPATHを正しく CMakeLists.txt に指定する</b><br/>
+コンパイル後に main または main.exe を実行すると以下のグラフが描画できます．
 </br><img src="gnuplot_test.png" width="50%"></img></br>
-</br><b>コンパイル時の注意点：EigenのインストールPATHを正しく CMakeLists.txt に指定する</b>
-gnuplot-cpp の使用方法については割愛させていただきますが、後々プロットのサンプルコードなどもアップしていきたいと考えています．
+gnuplot-cpp の使用方法については割愛させていただきますが、このグラフは以下に示すように非常にシンプルなコードで生成できます：
+<pre class="brush: cpp;">
+  VectorXd x = VectorXd::LinSpaced(30, 0, 5); // 0から5までの値を30等分
+  VectorXd y = x.array() + x.array().sin();
+
+  Gnuplot gp;
+  gp.set_grid().set_style("linespoints");
+  gp.plot_xy(x, y, "x + sin(x)");
+</pre>
+
 
  </div><!-- /#contents-->
 

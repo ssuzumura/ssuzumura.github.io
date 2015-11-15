@@ -119,7 +119,7 @@ void foo(NumericMatrix A, NumericVector x)
 <h2>コンパイルオプションの設定</h2>
 Eigenを使用するには、コンパイラにEigenのインクルードパスを設定する必要があります．
 コンパイルオプションは、「Makevars」というファイルに追加します．C/C++のソースと同じ場所に以下のMakevarsファイルを作成して下さい．
- <pre class="brush: bash;">PKG_CXXFLAGS= -std=c++11 -I"Eigenのパス" -O2 -march=native $(shell Rscript -e "Rcpp:::CxxFlags()")
+ <pre class="brush: bash;">PKG_CXXFLAGS= -std=c++11 -I"Eigenのパス" -O3 -march=native $(shell Rscript -e "Rcpp:::CxxFlags()")
 PKG_LIBS=$(shell Rscript -e "Rcpp:::LdFlags()")</pre>
 
  </div><!-- /#contents-->
@@ -127,9 +127,6 @@ PKG_LIBS=$(shell Rscript -e "Rcpp:::LdFlags()")</pre>
  <div id="pageTop">
    <a href="#top">このページのトップへ戻る</a>
  </div><!-- /#pageTop-->
- <div id="footer">
-   <div class="copyright">Copyright &copy; 2015 S.Suzumura Rights Reserved.</div>
- </div><!-- /#footer-->
 </div><!-- /#top-->
 </body>
 </html>
