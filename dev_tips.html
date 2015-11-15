@@ -38,7 +38,7 @@
 <div id="contents">
 <h2>Eigen C++ではじめる機械学習</h2>
 ここでは、Eigenと呼ばれるC++用の数値計算ライブラリを用いていくつかの機械学習アルゴリズムを実装します．
-簡単に実装ができて、かつ応用が効くものをピックアップしていきます．
+近年のデータ量の増大にともない、アルゴリズムのスケーラビリティが高いものを優先的にピックアップしました．
 
 <br/>
 （<font color="red">しばらく更新を怠っておりましたが、体調を壊して１０日間ほど入院しておりました．
@@ -55,25 +55,38 @@
 
   <li>最小二乗誤差最小化学習
   <ul>
-  <li>最小二乗法による線形回帰</li>
+  <li>最小二乗法による線形回帰
+   <ul>
+    <li>直接法(LU分解,コレスキー分解)による解法</li>
+    <li>逐次法による解法1 (最急降下法, 確率的勾配法)</li>
+    <li>逐次法による解法2 (共役勾配法)</li>
+   </ul>
+  </li>
   <li>リッジ回帰</li>
-  <li>LASSO回帰（Shootingアルゴリズムによる解法）</li>
+  <li>LASSO回帰
+   <ul>
+    <li>劣勾配法</li>
+    <li>Shootingアルゴリズム</li>
+   </ul>
+  </li>
   </ul>
   </li>
 
   <li>ロジステック回帰の実装
   <ul>
-  <li>最急降下法</li>
-  <li>確率的勾配法</li>
-  <li>直線探索</li>
-  <li>準ニュートン法(BFGS法, L-BFGS法)</li>
-  <li>共役勾配法, Newton-CG法</li>
+  <li>準ニュートン法
+   <ul>
+    <li>バックトラッキング直線探索</li>
+    <li>BFGS法</li>
+    <li>L-BFGS法 (少メモリーBFGS法)</li>
+   </ul>
+  </li>
+  <li>Newton-CG (conjugate gradient) 法</li>
   </ul>
   </li>
 
   <li>サポートベクターマシンン
   <ul>
-  <li>劣勾配法</li>
   <li>Dual Coordinate Descent/Ascent Method</li>
   <li>LIBLINEARをEigenで高速化する</li>
   </ul>
@@ -90,8 +103,19 @@
   <li>ニューラルネットワークの実装
   <ul>
   <li>3層ニューラルネットを10分でつくる</li>
-  <li>並列計算してみる</li>
+  <li>Open MPによる並列計算</li>
+  <li>GPGPUによる並列計算</li>
   <li>Greedy Layer-wise 学習の実装</li>
+  <li>MPI-Allreduceによる分散計算</li>
+  <li>Hadoop, Sparkに関するコメント</li>
+  </ul>
+  </li>
+
+  <li>ベイズ的最適化を用いた実験計画
+  <ul>
+  <li>最尤推定とMAP推定</li>
+  <li>Gaussian Process</li>
+  <li>Rank One Update による高速化</li>
   </ul>
   </li>
 
