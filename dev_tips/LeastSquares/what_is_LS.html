@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <meta http-equiv="imagetoolbar" content="no" />
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+  <link type="text/css" rel="stylesheet" href="../../css/styles/shCoreDefault.css"/>
+  <script type="text/javascript" src="../../css/scripts/shCore.js"></script>
+  <script type="text/javascript" src="../../css/scripts/shBrushBash.js"></script>
+  <script type="text/javascript" src="../../css/scripts/shBrushCpp.js"></script>
+  <script type="text/javascript" src="../../css/scripts/shBrushPlain.js"></script>
+  <script type="text/javascript">SyntaxHighlighter.all();</script>
+  <title>二乗誤差最小化学習とは</title>
+  <!-- MathJax -->
+  <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ["\\[","\\]"]],
+      processEscapes: true
+    },
+    TeX: {
+      Macros: {
+        bm: ['{\\boldsymbol{#1}}', 1],
+      }
+    },
+    "HTML-CSS": { matchFontHeight: false },
+    displayAlign: "left",
+    displayIndent: "2em"
+  });
+  </script>
+  <!-- MathJax end -->
+  <!-- google analityics -->
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35918686-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  <!-- google analityics end -->
+</head>
+<body>
+<div id="top">
+
+<div id="contents">
+<h2>二乗誤差最小化学習とは (<a href="../../dev_tips.html">全体の目次に戻る</a>)</h2>
+二乗誤差(least-squares error) 最小化学習は、多くの最適化問題の基本の一つです．
+最小二乗誤差を最小化する方法は、機械学習に限らず、動画像処理、統計学、数値解析、機械工学全般など非常に多くの分野で考えられています．
+機械学習においては、例えば、プロ野球選手の年収を「打率、得点率、盗塁率」という３つの特徴を用いて予測(※1)するときなどに使用されます．
+具体的な説明の前に、次の重要なキーワードについて説明します．
+<ul>
+  <li>計画行列</li>
+  <li>非説明変数</li>
+</ul>
+
+<h3>計画行列(design matrix)とは</h3>
+計画行列(design matrix)とは、$n \times d$次元の行列を示しています．
+ここで、$n$はサンプル数、$d$は特徴数です．
+具体例を示すと、３人分(n=3)の打率、得点率、盗塁率は計画行列を用いて
+\[\begin{align*}
+\bm{X}=
+\begin{bmatrix}
+打率 & 得点率 & 盗塁成功率 \\ \hline
+0.255 & 0.45 & 0.60 \\
+0.320 & 0.35 & 0.80 \\
+0.222 & 0.38 & 0.78
+\end{bmatrix}
+\end{align*}\]
+と表現できます．なお、これらの特徴（打率、得点率、盗塁率）は「素性」や「説明変数」と呼ばれることもあります．
+
+表記をより一般化すると
+\[\begin{align*}
+\bm{X}=
+\begin{bmatrix}
+x_{11} & x_{12} & x_{13} \\
+x_{21} & x_{22} & x_{23} \\
+x_{31} & x_{32} & x_{33}
+\end{bmatrix}
+\end{align*}\]
+となります．計画行列は、ユーザーが自由に設計することができます．例えば、元の特徴を2乗して
+\[\begin{align*}
+\bm{X}=
+\begin{bmatrix}
+x_{11}^2 & x_{12}^2 & x_{13}^2 \\
+x_{21}^2 & x_{22}^2 & x_{23}^2 \\
+x_{31}^2 & x_{32}^2 & x_{33}^2
+\end{bmatrix}
+\end{align*}\]
+とすることも考えられます．
+今は説明の簡単化のために特徴の2乗を考えていますが、
+どのような特徴を用いると予測精度が良くなるかは、伝統的には事前知識に基づいて決めます．
+機械学習ではとにかく沢山の特徴をしておき、次に説明するLASSOなどを用いて自動的に特徴を選択することもあります．
+
+<br/><br/>話が飛躍しますが、本説明ではプロ野球選手の「打率、得点率、盗塁率」を引き合いに出していますが、
+これが年収に影響しているのかどうか？ なぜこの３つを用いたのか? ということを疑問に持たれた方もいるかもしれません．
+
+機械学習では、とにかく多くの特徴を用いて予測精度を向上させることが多いです．
+しかし、どのような特徴が重要なのかを論じることも重要です（統計的検定の話になっていきます）．
+
+<h3>非説明変数(アウトカム, レスポンス)とは</h3>
+上の例で使用した３人分のプロ野球選手の年収について考えて下さい．
+もし、３人分の年収が
+\[\begin{align*}
+\bm{y}=
+\begin{bmatrix}
+年収「万円」 \\ \hline
+950 \\
+2200 \\
+550
+\end{bmatrix}
+\end{align*}\]
+と与えられているとき、これを非説明変数あるいはアウトカム、レスポンスなどと呼びます．
+
+<h2>二乗誤差最小化学習</h2>
+ここでは線形モデル（※2）
+\[\bm{f}(\bm{X}; \bm{\beta}) = \bm{X}\bm{\beta}\]
+を用いて、未知の入力$\tilde{\bm{X}}$に対する$\bm{f}(\tilde{\bm{X}}; \bm{\beta})$を予測することを考えます．
+ここで、$\bm{\beta}$は予め与えられた$\bm{X}$とレスポンス$\bm{y}$を用いて決める$d$次元のパラメータを示しています．
+
+プロ野球選手の年収を予測する例で説明すると、１年間分のデータから$\bm{X},\bm{y}$を求めておき、
+来年度の年収$\hat{\bm{y}}$を予測することに対応します．
+
+<br/>
+二乗誤差最小化学習では、手持ちの$\bm{X},\bm{y}$を用いて$\bm{\beta}$を以下の基準により求めます．
+\[\bm{\beta}^* := \arg \min_{\beta \in \mathbb{R}^d} \|\bm{X}\bm{\beta} - \bm{y}\|^2\]
+ここで、$\|\cdot\|$はユークリッドノルム（$L_2$ノルム）を示しています．
+$\|\bm{a}\|^2 = \bm{a}^\top \bm{a}$ですので、計画行列の $i$ 行目を$\bm{x}_i$と表すと
+\[\bm{\beta}^* := \arg \min_{\beta \in \mathbb{R}^d} \sum_i^n (\bm{\beta}^\top \bm{x}_i - y_i)^2\]
+と表すこともできます．
+
+この最小化問題は、例えば$\bm{\beta}$が2次元のベクトルのとき、図に示される
+最適解$\bm{\beta}^*$を求める問題です．<br/>
+<img src="LS_error.png"></img><br/>
+図の縦軸は$\|\bm{X}\bm{\beta} - \bm{y}\|^2$の値を示しています．
+最適解$\bm{\beta}^*$は$\|\bm{X}\bm{\beta} - \bm{y}\|^2$のサーフェスが真っ平らになっている点（勾配が0となる点）ですから、
+\[\frac{\partial}{\partial \bm{\beta}}\|\bm{X}\bm{\beta} - \bm{y}\|^2 = \bm{0}\]
+を満たすものが$\bm{\beta}^*$となります．
+つまり
+\[
+\begin{align*}
+ \frac{\partial}{\partial \bm{\beta}}\|\bm{X}\bm{\beta} - \bm{y}\|^2 &=
+ 2\bm{X}^\top (\bm{X}\bm{\beta} - \bm{y}) = \bm{0}, \\
+ \bm{\beta}^* &= (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}
+\end{align*}
+\]
+と求めることができます(※3, ※4)．
+なお、2乗和誤差（$\|\bm{X}\bm{\beta} - \bm{y}\|^2$）を最小化させるパラメータ$\bm{\beta}^*$を求める方法は、
+<font color="red">最小二乗法（OLS: ordinary least squares method）</font>と呼ばれます．
+今後、最小二乗法の発展形である、リッジ回帰やLASSO回帰を扱っていきます．
+
+<br/>
+<hr/>
+脚注：
+<ul>
+<li>※1: 機械学習では、未知の入力に対する出力（年収）をうまく予測することが重要視されます．
+  予測をリーズナブルに行うためには過学習/オーバーフィッティングと呼ばれるものを抑える事が必要になります．</li>
+<li>※2: ここで使用するモデルは$\bm{f}(\bm{X}; \bm{\beta}) = \bm{X}\bm{\beta}$は、
+  パラメータ$\bm{\beta}$に関して線形です．計画行列の特徴に非線形性を考慮した特徴（元の特徴の２乗など）を追加しておけば、特徴に対しては非線形なモデルとなります．</li>
+<li>※3: 今、$J(\bm{\beta}) := \|\bm{X}\bm{\beta} - \bm{y}\|^2$として、$\bm{\beta}=\bm{0}$の周りでTaylor展開します：
+  \[J(\bm{\beta}) \approx J(\bm{0}) + \left(\frac{\partial J(\bm{0})}{\partial \bm{\beta}}\right)^\top \bm{\beta} + \frac{1}{2}\bm{\beta}^\top \left( \frac{\partial^2 J(\bm{0})}{\partial \bm{\beta} \partial^\top \bm{\beta}} \right) \bm{\beta} \]
+  この式の右辺に対するNewton法の探索方向（Newtonステップ）を求めると
+  \[-\left( \frac{\partial^2 J(\bm{0})}{\partial \bm{\beta} \partial^\top \bm{\beta}} \right)^{-1} \frac{\partial J(\bm{0})}{\partial \bm{\beta}}
+  = -(2\bm{X}\bm{X})^{-1} 2\bm{X}^\top (\bm{X}\bm{0} - \bm{y}) = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}\]
+  となり$\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$と一致します．
+  このようにして$\bm{\beta}^*$はNewton法を１ステップ回せば求めることもできます．
+  これは$J(\bm{\beta})$はパラメータ$\bm{\beta}$に関して2次形式（$\bm{\beta}$が1次元のときは2次間数）になっているので当然ですね．
+<li>※4: $\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$は2乗和誤差（$\|\bm{X}\bm{\beta} - \bm{y}\|^2$）を最小化させます．
+  これは残差$\bm{X}\bm{\beta} - \bm{y}$が多次元正規分布$N(\bm{X}\bm{\beta}, \sigma^2 \bm{I})$に従うと仮定したときの最尤推定量と一致します．
+  ここで、$\sigma^2$は分散パラメータ, $\bm{I} \in \mathbb{R}^{n \times n}$は単位行列を示します．
+  今、$\bm{X}\bm{\beta} - \bm{y}$が以下の分布に従うと仮定します:
+  \[\bm{X}\bm{\beta} - \bm{y} \sim c \times \exp\left( -\frac{1}{2} (\bm{X}\bm{\beta} - \bm{y})^\top \Sigma^{-1} (\bm{X}\bm{\beta} - \bm{y}) \right) \]
+  ここで、$c$は定数、$\Sigma = \sigma^2 \bm{I}$は既知の分散共分散行列です．この右辺の$-\log()$を取ったものが最大となる点は$\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$となります．
+</ul>
+ </div><!-- /#contents-->
+
+ <div id="pageTop">
+   <a href="#top">このページのトップへ戻る</a>
+ </div><!-- /#pageTop-->
+</div><!-- /#top-->
+</body>
+</html>
