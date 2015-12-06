@@ -21,7 +21,8 @@
     tex2jax: {
       inlineMath: [['$','$'], ['\\(','\\)']],
       displayMath: [['$$','$$'], ["\\[","\\]"]],
-      processEscapes: true
+      processEscapes: true,
+      skipTags: ["script","noscript","style","textarea","pre"]
     },
     TeX: {
       Macros: {
@@ -173,7 +174,7 @@ $\|\bm{a}\|^2 = \bm{a}^\top \bm{a}$ですので、計画行列の $i$ 行目を$
   このようにして$\bm{\beta}^*$はNewton法を１ステップ回せば求めることもできます．
   これは$J(\bm{\beta})$はパラメータ$\bm{\beta}$に関して2次形式（$\bm{\beta}$が1次元のときは2次間数）になっているので当然ですね．
 <li>※4: $\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$は2乗和誤差（$\|\bm{X}\bm{\beta} - \bm{y}\|^2$）を最小化させます．
-  これは残差$\bm{X}\bm{\beta} - \bm{y}$が多次元正規分布$N(\bm{X}\bm{\beta}, \sigma^2 \bm{I})$に従うと仮定したときの最尤推定量と一致します．
+  これは残差$\bm{X}\bm{\beta} - \bm{y}$が多変量正規分布$N(\bm{X}\bm{\beta}, \sigma^2 \bm{I})$に従うと仮定したときの最尤推定量と一致します．
   ここで、$\sigma^2$は分散パラメータ, $\bm{I} \in \mathbb{R}^{n \times n}$は単位行列を示します．
   今、$\bm{X}\bm{\beta} - \bm{y}$が以下の分布に従うと仮定します:
   \[\bm{X}\bm{\beta} - \bm{y} \sim c \times \exp\left( -\frac{1}{2} (\bm{X}\bm{\beta} - \bm{y})^\top \Sigma^{-1} (\bm{X}\bm{\beta} - \bm{y}) \right) \]
