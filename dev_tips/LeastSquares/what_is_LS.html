@@ -176,7 +176,7 @@ $\|\bm{a}\|^2 = \bm{a}^\top \bm{a}$ですので、計画行列の $i$ 行目の�
   これは$\bm{y}$が平均ベクトル$\bm{X}\bm{\beta} \in \mathbb{R}^{n}$,分散共分散行列$\Sigma = \sigma^2 \bm{I} \in \mathbb{R}^{n \times n}$の
   多変量正規分布$N(\bm{X}\bm{\beta}, \Sigma)$から発生していると仮定したときの最尤推定量と一致します．
   具体的に$\bm{y}$が観測されたもとで尤度関数
-  \[N(\bm{X}\bm{\beta}, \Sigma; \bm{\beta}) = c \times \exp\left( -\frac{1}{2} (\bm{y} - \bm{X}\bm{\beta})^\top \Sigma^{-1} (\bm{y} - \bm{X}\bm{\beta}) \right) \]
+  \[J(\bm{\beta}) = c \times \exp\left( -\frac{1}{2} (\bm{y} - \bm{X}\bm{\beta})^\top \Sigma^{-1} (\bm{y} - \bm{X}\bm{\beta}) \right) \]
   を考えます．
   ここで、$c$は既知の定数です．この右辺を最大化する点は$\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$となります．
 </ul>
