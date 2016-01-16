@@ -54,7 +54,7 @@
 <a href="what_is_LS.html">節のはじめ</a>に説明したように最小二乗法の解は$\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$と表すことができます．
 では実際にEigen C++ライブラリを用いて$\bm{\beta}^*$を求めていきます．
 
-<h3 id="LU_CHOL">直接法(LU分解,コレスキー分解)</h3>
+<h3 id="LU_CHOL">直接法</h3>
 最小二乗法の解$\bm{\beta}^* = (\bm{X}^\top \bm{X})^{-1} \bm{X}^\top \bm{y}$は
 \[
 \begin{align*}
@@ -98,6 +98,40 @@ Eigen には様々な連立一次方程式のソルバーが実装されてお�
 プログラムの出力結果は以下となり、赤線が$x+sin(x)$を示し、緑線が$f(\bm{X}; \bm{\beta}) = \bm{X} \bm{\beta}$を示しています．
 <br/>
 <img src="LU_example.png"></img>
+
+<!----------------->
+
+<h3 id="ITERATIVE">反復法</h3>
+<a href="what_is_LS.html">節のはじめ</a>に説明したように最小二乗法では
+\[\bm{\beta}^* := \arg \min_{\beta \in \mathbb{R}^d} \|\bm{X}\bm{\beta} - \bm{y}\|^2\]
+を満たすパラメータ$\bm{\beta}^*$を求めます．
+この$\bm{\beta}^*$は以下の図に示すように
+ランダムに設定した初期値(initial point)から出発して、谷底に向かって探索することで求められます．
+<br/><img src="LS_error2.png"></img><br/>
+
+このように谷底に向かって探索することが出来る最も単純な方法の一つとして最急降下法(steepest descent method)があげられます．
+最急降下法では傾斜を下るように勾配の逆方向にパラメータを更新していきます．
+具体的には
+\[
+ \bm{\beta}^*_{t+1} \leftarrow \bm{\beta}^*_t - \eta_t \frac{\partial J(\bm{\beta}_t)}{\partial \bm{\beta}_t},
+ \quad J(\bm{\beta}_t) := \|\bm{X}\bm{\beta}_t - \bm{y}\|^2
+\]
+により反復的に更新していきます．ここで、$\eta_t \in \mathbb{R}$ は探索幅(step size)と呼ばれ、勾配の逆方向にどのくらい進むかの歩幅を表します．
+
+さて、勾配$\frac{\partial J(\bm{\beta}_t)}{\partial \bm{\beta}_t}$は具体的に
+\[
+ \frac{\partial J(\bm{\beta}_t)}{\partial \bm{\beta}_t} := 2\bm{X}^\top(\bm{X}\bm{\beta}_t - \bm{y})
+\]
+と求めることができます．探索幅$\eta_t$はユーザーが事前に設定しておくことも考えられますが、
+最急降下法では直線探索(line search)により適用的に求めるのが普通です．
+直線探索は非常に奥が深いですが、ここでは簡単に概要をまとめます．
+
+<ul>
+<li>厳密な直線探索(exact line search)</li>
+<li>厳密でない直線探索</li>
+</ul>
+（工事中）
+
 
  </div><!-- /#contents-->
 
