@@ -33,31 +33,25 @@
 
 <div id="contents">
  <h2>Eigenのインストール (<a href="../../dev_tips.html">全体の目次に戻る</a>)</h2>
-<ul>
- <li> <a href="#explain_text">テキストによる説明</a> </li>
-  <li> <a href="#explain_movie">動画による説明</a> </li>
-</ul>
-
-<h3 id="explain_text">テキストによる説明</h3>
 Eigenはヘッダーファイルとして配布されており，それらをインクルードするだけで使用することができます．
-以下の手順に従い，サンプルコードが実行できることを確認して下さい．</br></br>
+以下の手順通りに作業を進めると、サンプルコードを実行できます．</br></br>
 <ul>
  <li><a href="http://eigen.tuxfamily.org/">こちら</a>の公式サイトから最新版をダウンロードして解凍します (画面右端のGet Itからダウンロード)</li>
  <li>解凍後，フォルダ名をeigen33とします(33はバージョンを表す).</li>
- <li>eigen33フォルダを下記のディレクトリ直下に移動させます.
+ <li>以下のディレクトリ構造でファイルを保存していきます．
   <ul>
-   <li> Windowsの場合 C:/</li>
-   <li> Mac/Linuxの場合 /usr/local/include/</li>
+   <li>eigen33 (eigenが保存されたフォルダ)</li>
+   <li>CMakeLists.txt (cmakeの設定ファイル)</li>
+   <li>test.cc (サンプルコード)</li>
   </ul>
- </li>
- <li>以下のCMakeLists.txtファイルを作成してください.
+CMakeLists.txt：
 <pre class="brush: bash;">
 cmake_minimum_required(VERSION 2.8)
 add_definitions("-std=c++11 -Wall -O3 -march=native")
-include_directories(”C:/eigen33”) # eigen33のパスを指定
+include_directories("eigen33") # eigen33のパスを指定
 add_executable(main test.cc)
- </li>
- <li>以下のtest.ccファイルを作成してください.
+ </pre>
+test.cc：
 <pre class="brush: cpp;">
 #include &lt;iostream&gt;
 #include &lt;Eigen/Core&gt;
@@ -72,18 +66,15 @@ int main(void)
   std::cout << A << std::endl;
   return 0;
 }
- </pre></li>
+ </pre>
+ </li>
  <li>test.ccをコンパイルして実行すると</br>
 　1 2 3</br>
 　4 5 6</br>
 　7 8 9</br>
-が表示されます．コンパイル方法についてはCMakeに関する<a href="./part1_cmake.html">記事</a>をご確認ください．
+が表示されます．コンパイル方法についてはCMakeに関する<a href="inst_cmake.html">記事</a>もご確認ください．
 </li>
-</ul></br></br>
-
-<h3 id="explain_movie">動画による説明</h3>
-<iframe width="420" height="315" src="https://www.youtube.com/embed/rQCuATKcsv4" frameborder="0" allowfullscreen></iframe>
-
+</ul>
  </div><!-- /#contents-->
 
  <div id="pageTop">
