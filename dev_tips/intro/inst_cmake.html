@@ -80,19 +80,21 @@ make    # build
  <li>次に、このページの上段に記載されている「CMakeLists.txt」と「test.cc」を同じフォルダ上に作成してください．</li>
  <li>二つのファイルと同じディレクトリ上で以下が実行できれば作業完了です.</li>
  <pre class="brush: bash;">
- cmake -G "MinGW Makefiles". # build環境構築
+ cmake -G "MinGW Makefiles" . # build環境構築
  mingw32-make  # build
  main.exe  # 実行
  </pre>
- なお、cmakeの挙動がおかしい場合は「<font color="red">CMakeCache.txt</font>」というファイルを一度削除してから、もう一度 cmake を実行して下さい．
- プログラムの実行結果がおかしい場合は「mingw32-make clean」も実行してみてください．
+ なお、cmakeの挙動がおかしい場合は「CMakeCache.txt」ファイルと
+ 「CMakeFiles」フォルダを削除し、もう一度 cmake を実行してください．
 
  <h4>Windowsワンポイントアドバイス</h4>
  <ul>
   <li>「Shiftキー」を押しながら「右クリック」することで「コマンドウィンドウをここで開く」機能が使用できます．</li>
   <li>「Windowsキー」を押しながら「Rキー」を押すことでコマンドの実行ウィンドウが立ち上がります．
 		そこに「cmd」と打ち込めばコマンドプロンプトが立ち上がります．</li>
-	<li>コマンドプロンプト上で「doskey make=mingw32-make」と打ち込めば、mingw32-make を make というコマンドで実行できます(aliasできます)．</li>
+	<li>コマンドプロンプト上で「doskey make=mingw32-make」と打ち込めば、
+		mingw32-make を make というコマンドで実行できます(aliasできます)．
+	あるいは、mingw の bin フォルダ内にバッチファイル（中身はmingw32-makeと記述）を作成しておく方法もよいでしょう．</li>
  </ul>
 
  </div><!-- /#contents-->
