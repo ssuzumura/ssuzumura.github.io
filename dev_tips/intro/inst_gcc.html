@@ -32,44 +32,37 @@
 <div id="top">
 <div id="contents">
  <h2>C++11のコンパイル環境構築 (<a href="../../dev_tips.html">全体の目次に戻る</a>)</h2>
-<ul>
- <li><a href="#Linux">Linux/Macにおける作業</a></li>
- <li><a href="#Windows">Windowsにおける作業</a>
-  <ul>
-	<li><a href="#ShowExt">ファイル拡張子の表示</a></li>
-	<li><a href="#InstMinGW">MinGWのインストール</a></li>
-  </ul>
- </li>
-</ul>
+本サイトではC++11と呼ばれるコンパイラを用いてプログラミングしていきます．
+ここではコンパイラ、およびコンパイルを自動化するCMakeをインストールします．
 
-<h3 id="Linux">Linux or Mac における作業</h3>
-Mac OSXではXcodeをインストールして下さい（コンパイラはGCCあるいはClangのどちらでもOK)．
-<br/>
+<h3 id="Linux">Linuxにおける作業</h3>
 Linux の場合は Ubuntu OS でしたら以下を実行すれば環境構築は完了です．
 <pre class="brush: bash;">
-sudo apt-get install gcc
+sudo apt-get install gcc cmake
 </pre>
 ただし、バージョン 4.7 以降の GCC をインストールして下さい(g++ -v でバージョン確認)．
-GCC をソースからコンパイルする場合は例えば<a href="http://www.mk-mode.com/octopress/2014/09/30/installation-newest-gcc-by-src-on-linux-mint/">こちら</a>を参考にして下さい．
+GCC をソースからコンパイルする場合は例えば<a href="http://www.mk-mode.com/octopress/2014/09/30/installation-newest-gcc-by-src-on-linux-mint/">こちら</a>をご参照ください．
+CentOSをご利用の方は<a href="http://www.task-notes.com/entry/20151114/1447492231">こちら</a>をご参照ください．
 </br></br>
 
 <h3 id="Windows">Windowsにおける作業</h3>
-<h4 id="ShowExt">ファイル拡張子の表示</h4>
-Windowsでプログラミングを始める際は必ずファイルの拡張子を表示するように設定してください．
-表示方法は、例えば
-<a href="http://www.microsoft.com/ja-jp/atlife/tips/archive/windows/tips/252.aspx">こちら</a>をご覧ください．
-</br></br>
-
-<h4 id="InstMinGW">MinGWのインストール</h4>
-開発環境の一つであるMinGW-W64をインストールします．
+Windowsでは<a href="https://osdn.jp/projects/sfnet_msys2/">MSYS2</a>を用いてGCCをインストールするのが簡単です．
+<br/>インストール手順：
 <ul>
- <li><a href="http://MinGW-W64.org/doku.php/download/mingw-builds">公式サイト</a>からインストーラーをダウンロードして実行してください．</li>
- <li>設定画面ではArchitectureを「x86_64」に設定します．<img src="inst_mingw.png"></img></li>
- <li>MinGW-W64のインストール先は任意で構いません．</li>
+ <li><a href="https://msys2.github.io/">こちら</a>の公式サイトからmsys2-x86_64をダウンロードしてインストール（デフォルト値のままでインストール）</li>
+ <li>インストール後に実行されるシェル端末に「pacman -Sy pacman」と打ち込んでEnter</li>
+ <li>一度端末を閉じて、スタートメニューから「MSYS2 Shell」を実行</li>
+ <li>端末上に「pacman -Syu」と打ち込んでEnter</li>
+ <li>再度端末を閉じて、スタートメニューから「MSYS2 Shell」を実行（端末が立ち上がらない場合は「C:\msys64\msys2_shell.cmdを実行」）</li>
+ <li>端末上に「pacman -Su」と打ち込んでEnter</li>
+ <li>端末上に「pacman -S gcc」と打ち込んでEnter</li>
+ <li>端末上に「pacman -S cmake」と打ち込んでEnter</li>
+ <li>端末上に「pacman -S make」と打ち込んでEnter</li>
 </ul>
-
-インストール後、MinGW-W64の「bin」フォルダをWindowsの環境変数「path」に登録しておいて下さい。
-</br></br>
+<b>右クリックでMSYS2を実行する方法</b><br/>
+以下、レジストリーの内容を書き換えるため、ちゃんと内容を確認して自己責任で実行してください．<br/>
+<a href="https://gist.github.com/commonquail/7df0a1f0700706a8e43e/raw/28ed6c2795974aaa29571758b8fceebf6a8e129a/open_msys2.reg">こちら</a>から「open_msys2.reg」というファイルをダウンロードして実行してください．
+特定のフォルダを右クリックし「Open MSYS2 here」を押すとMSYS2のシェル端末を開くことができます．
 
  </div><!-- /#contents-->
 
