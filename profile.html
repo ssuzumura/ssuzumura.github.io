@@ -1,48 +1,73 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" href="css/common.css" type="text/css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<title>About Me</title>
-<!-- google analityics -->
-<script type="text/javascript">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cardio: Free One Page Template by Luka Cvetinovic</title>
+	<meta name="description" content="Cardio is a free one page template made exclusively for Codrops by Luka Cvetinovic" />
+	<meta name="keywords" content="html template, css, free, one page, gym, fitness, web design" />
+	<meta name="author" content="Luka Cvetinovic for Codrops" />
+	<!-- Favicons (created with http://realfavicongenerator.net/)-->
+	<link rel="manifest" href="img/favicons/manifest.json">
+	<link rel="shortcut icon" href="img/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#00a8ff">
+	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Normalize -->
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<!-- Owl -->
+	<link rel="stylesheet" type="text/css" href="css/owl.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
+	<!-- Elegant Icons -->
+	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
+	<!-- Main style -->
+	<link rel="stylesheet" type="text/css" href="css/cardio.css">
+  <!-- google analityics -->
+  <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-35918686-1']);
-  _gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35918686-1']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 
-</script>
-<!-- google analityics end -->
+  </script>
+  <!-- google analityics end -->
 </head>
-<body>
-<div id="top">
-<div id="menu">
-  <ul>
-  <li><a href="gallery.html">Gallery</a></li>
-  <li><a href="profile.html" class="on">About Me</a></li>
-  <li><a href="index.html">Publications</a></li>
-  <li><a href="software.html">Software</a></li>
-  </ul>
-</div><!-- /#menu-->
 
-<div id="contents">
-<h2>Affiliation (<a href="profile_jp.html">in Japanese</a>)</h2>
-Shinya SUZUMURA, PhD student.
-</br>
-Nagoya Institute of Technology, Japan.
+<body>
+	<div class="preloader">
+	</div>
+	<nav class="navbar">
+		<div class="container">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-fixed-top main-nav">
+					<li><a href="index.html#publications">Publications</a></li>
+					<li><a href="#profile">About Me</a></li>
+					<li><a href="software.html">Softwares</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+	<section id="profile" class="section section-padded">
+		<div class="container">
+<h2>Affiliation</h2>
+Shinya SUZUMURA, PhD student, Nagoya Institute of Technology, Japan.
 </br>
 I am temporarily taking off from university to study, and I am currently working for an IT/ICT company,
 but I try to publish several papers enthusiastically.
@@ -54,14 +79,29 @@ but I try to publish several papers enthusiastically.
  <li>Machine Learning for Information Retrieval</li>
 </ul>
 
-<h2>Favorite Programming Languages and Hobby</h2>
+<h2>My Hobby</h2>
 <ul>
- <li>C/C++, R, MATLAB, Java, MASM/GAS, Python, PHP, Haskell, HSP</li>
- <li>I like Shogi (japanese chess). Even if I close my eyes I can simultaneously play it together with other 2 players. Will you solve the following problem (which is called Tsume-shogi) ?</li>
+ <li>I like Shogi (Japanese chess). Even if I close my eyes I can simultaneously play it together with other 2 players. Will you solve the following problem (which is called Tsume-shogi) ?</li>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/3move_Tsumeshogi_MJ.svg/250px-3move_Tsumeshogi_MJ.svg.png">(from <a href="https://en.wikipedia.org/wiki/Tsumeshogi">wikipedia</a>)</img>
 </ul>
+		</div>
+	</section>
 
-</div><!-- /#contents-->
-</div><!-- /#top-->
+	<footer>
+		<div class="container">
+			<div class="container">
+				<p>&copy; 2015 All Rights Reserved. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
+			</div>
+		</div>
+	</footer>
+	<!-- Scripts -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/typewriter.js"></script>
+	<script src="js/jquery.onepagenav.js"></script>
+	<script src="js/main.js"></script>
 </body>
+
 </html>

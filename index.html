@@ -1,43 +1,86 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Content-Style-Type" content="text/css" />
-<meta http-equiv="Content-Script-Type" content="text/javascript" />
-<meta http-equiv="imagetoolbar" content="no" />
-<meta name="description" content="" />
-<meta name="keywords" content="" />
-<link rel="stylesheet" href="css/common.css" type="text/css" />
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
-<title>Publications</title>
-<!-- google analityics -->
-<script type="text/javascript">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cardio: Free One Page Template by Luka Cvetinovic</title>
+	<meta name="description" content="Cardio is a free one page template made exclusively for Codrops by Luka Cvetinovic" />
+	<meta name="keywords" content="html template, css, free, one page, gym, fitness, web design" />
+	<meta name="author" content="Luka Cvetinovic for Codrops" />
+	<!-- Favicons (created with http://realfavicongenerator.net/)-->
+	<link rel="manifest" href="img/favicons/manifest.json">
+	<link rel="shortcut icon" href="img/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#00a8ff">
+	<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- Normalize -->
+	<link rel="stylesheet" type="text/css" href="css/normalize.css">
+	<!-- Bootstrap -->
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<!-- Owl -->
+	<link rel="stylesheet" type="text/css" href="css/owl.css">
+	<!-- Animate.css -->
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.1.0/css/font-awesome.min.css">
+	<!-- Elegant Icons -->
+	<link rel="stylesheet" type="text/css" href="fonts/eleganticons/et-icons.css">
+	<!-- Main style -->
+	<link rel="stylesheet" type="text/css" href="css/cardio.css">
+  <!-- google analityics -->
+  <script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-35918686-1']);
-  _gaq.push(['_trackPageview']);
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35918686-1']);
+    _gaq.push(['_trackPageview']);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
 
-</script>
-<!-- google analityics end -->
+  </script>
+  <!-- google analityics end -->
 </head>
+
 <body>
-<div id="top">
-<div id="menu">
-  <ul>
-  <li><a href="gallery.html">Gallery</a></li>
-  <li><a href="profile.html">About Me</a></li>
-  <li><a href="index.html" class="on">Publications</a></li>
-  <li><a href="software.html">Software</a></li>
-  </ul>
-</div><!-- /#menu-->
-<div id="contents">
+	<div class="preloader">
+	</div>
+	<nav class="navbar">
+		<div class="container">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-fixed-top main-nav">
+					<li><a href="#publications" class="on">Publications</a></li>
+					<li><a href="profile.html">About Me</a></li>
+					<li><a href="software.html">Softwares</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<header id="intro">
+		<div class="container">
+			<div class="table">
+				<div class="header-text">
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<h3 class="light white">We have quite biased large scale data.</h3>
+							<h1 class="white typed">Analyzation and Adaptation.</h1>
+							<span class="typed-cursor">|</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<section id="publications" class="section section-padded">
+		<div class="container">
    <h3>Journals</h3>
    <ol>
     <li>Shinya Suzumura, Kohei Ogawa, Masashi Sugiyama, Masayuki Karasuyama, Ichiro Takeuchi, "Homotopy Continuation Approaches for Robust SV Classification and Regression", Journal of Machine Learning, DOI: 10.1007/s10994-017-5627-7, 2017, <a href="http://link.springer.com/article/10.1007/s10994-017-5627-7?wt_mc=Internal.Event.1.SEM.ArticleAuthorAssignedToIssue">URL.</a></li>
@@ -45,9 +88,9 @@
 
    <h3>Conference Papers</h3>
    <ol>
-    <li>Shinya Suzumura, Kazuya Nakagawa, Yuta Umezu, Koji Tsuda, Ichiro Takeuchi, "Selective Inference for Sparse High-Order Interaction Models", In Proc. of ICML2017 (oral presentation).</li>
-    <li>Kazuya Nakagawa, Shinya Suzumura, Mahito Sugiyama, Koji Tsuda, Ichiro Takeuchi, "Safe Pattern Pruning: An Efficient Approach for Predictive Pattern Mining", In Proc. of ACM SIGKDD2016 (research track, acceptance rate 0.18), <a href="http://www.kdd.org/kdd2016/papers/files/rpp0635-nakagawaA.pdf">PDF.</a></li>
-    <li>Shinya Suzumura, Kohei Ogawa, Masashi Sugiyama, Ichiro Takeuchi, "Outlier Path: A Homotopy Algorithm for Robust SVM", In Proc. of ICML2014 (oral presentation, acceptance rate 0.25), <a href="http://www.ms.k.u-tokyo.ac.jp/2014/ICML2014b.pdf">PDF.</a></li>
+    <li>Shinya Suzumura, Kazuya Nakagawa, Yuta Umezu, Koji Tsuda, Ichiro Takeuchi, "Selective Inference for Sparse High-Order Interaction Models", In Proc. of ICML2017 (oral presentation, acceptance rate 25.4%).</li>
+    <li>Kazuya Nakagawa, Shinya Suzumura, Mahito Sugiyama, Koji Tsuda, Ichiro Takeuchi, "Safe Pattern Pruning: An Efficient Approach for Predictive Pattern Mining", In Proc. of ACM SIGKDD2016 (research track, acceptance rate 18%), <a href="http://www.kdd.org/kdd2016/papers/files/rpp0635-nakagawaA.pdf">PDF.</a></li>
+    <li>Shinya Suzumura, Kohei Ogawa, Masashi Sugiyama, Ichiro Takeuchi, "Outlier Path: A Homotopy Algorithm for Robust SVM", In Proc. of ICML2014 (oral presentation, acceptance rate 25%), <a href="http://www.ms.k.u-tokyo.ac.jp/2014/ICML2014b.pdf">PDF.</a></li>
     <li>Ryohei Nakano and Shinya Suzumura, "Grammatical Induction with Error Correction for Deterministic Context-free L-systems", In Proc. of WCECS2012, Vol.I, 2012, <font color=#EE5555>Best Paper Award</font> of International Conference on Machine Learning and Data Analysis, <a href="http://www.iaeng.org/publication/WCECS2012/WCECS2012_pp534-538.pdf">PDF.</a></li>
     <li>Shinya Suzumura and Ryohei Nakano, "Complex-valued Multilayer Perceptron Search Utilizing Eigen Vector Descent and Reducibility Mapping", In Proc. of ICANN2012, Vol.7553, Part II, pp.1-8, 2012.</li>
    </ol>
@@ -66,17 +109,25 @@
      <b>workshops</b></br>
      <ol>
        <li>鈴村 真矢，竹内 一郎，杉山 将, "ロバストサポートベクター回帰の解の性質とパラメトリック非凸最適化", 第11回 情報学ワークショップ(WiNF2013) 論文集, pp.27-32, 2013, <font color=#EE5555>最優秀論文賞</font>.</li>
-       <li><a href="http://www.ieice.org/ken/search/index.php?search_mode=form&year=39&psort=1&pskey=author%3A%22%CE%EB%C2%BC+%BF%BF%CC%F0%22&ps2=1&layout=&lang=&term=AUTHOR">その他</a></li>
      </ol>
-     <h3>Previous researches (in Japanese)</h3>
-     <ul>
-       <li><b><a href="research2012/Lsystem.html">Lシステムの文法発見と誤り訂正</a></b></li>
-       <li><b><a href="research2012/cvnn.html">複素ニューラルネットワークの学習法</a></b></li>
-       <li><b><a href="research2012/invpend.html">ニューラルネットワークを用いたシステム制御</a></b></li>
-     </ul>
-   </br></br>
+		</div>
+	</section>
 
-</div><!-- /#contents-->
-</div><!-- /#top-->
+	<footer>
+		<div class="container">
+			<div class="container">
+				<p>&copy; 2015 All Rights Reserved. Powered by <a href="http://www.phir.co/">PHIr</a> exclusively for <a href="http://tympanus.net/codrops/">Codrops</a></p>
+			</div>
+		</div>
+	</footer>
+	<!-- Scripts -->
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/wow.min.js"></script>
+	<script src="js/typewriter.js"></script>
+	<script src="js/jquery.onepagenav.js"></script>
+	<script src="js/main.js"></script>
 </body>
+
 </html>
